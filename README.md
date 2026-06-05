@@ -32,5 +32,4 @@ Para ejecutar este proyecto en un entorno Windows, asegúrate de contar con las 
 
 1. **Clonar el repositorio:**
 ```bash
-   git clone <URL_DE_TU_REPOSITORIO>
-   cd <NOMBRE_DE_LA_CARPETA>
+   git https://github.com/hunnku/Prueba_Tecnica_QA_Automatizacion.git
