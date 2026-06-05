@@ -3,7 +3,7 @@ import time
 from kafka import KafkaProducer, KafkaConsumer
 
 def test_telemetry_event():
-    topic_name = "qa_telemetry_events"
+    topic_name = "gps-raw-events"
     bootstrap_servers = ['localhost:9092']
 
     try:
@@ -13,10 +13,10 @@ def test_telemetry_event():
         )
 
         evento_enviado = {
-            "event_type": "user_login",
-            "platform": "android",
-            "timestamp": int(time.time()),
-            "status": "success"
+            "vehicleId": "VEH-99",
+            "lat": 4.60,
+            "lng": -74.08,
+            "speed": 65
         }
 
         print("1. Produciendo evento de telemetría hacia Kafka...")
@@ -39,13 +39,13 @@ def test_telemetry_event():
         mensaje_recibido = None
         
         for message in consumer:
-            if message.value.get("event_type") == "user_login":
+            if message.value.get("vehicleId") == "VEH-99":
                 mensaje_recibido = message.value
                 break
 
-        assert mensaje_recibido is not None, "Fallo: No se encontró el evento en Kafka."
-        assert mensaje_recibido["platform"] == "android", "Fallo: Plataforma incorrecta."
-        assert mensaje_recibido["status"] == "success", "Fallo: Estado incorrecto."
+        assert mensaje_recibido is not None, "Fallo: No se encontró el evento del vehículo."
+        assert type(mensaje_recibido["lat"]) == float, "Fallo de contrato: Latitud no es decimal."
+        assert mensaje_recibido["speed"] == 65, "Fallo: La velocidad no coincide."
 
         print("¡BONUS TRACK COMPLETADO! Evento producido, consumido y validado con éxito.")
 

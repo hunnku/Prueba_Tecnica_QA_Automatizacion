@@ -1,0 +1,30 @@
+INFORME DE EVALUACIÓN - PRUEBA TÉCNICA QA AUTOMATION
+
+A continuación, se detalla el análisis del repositorio frente a los requisitos establecidos en la prueba técnica:
+
+1. ENTREGABLES OBLIGATORIOS
+- Repositorio de Código Público: CUMPLE (Código estructurado, limpio y con patrón POM).
+- Archivo README.md: NO CUMPLE. El archivo existe pero está incompleto; le faltan los requisitos previos (ej. Node.js, variables de entorno), comandos de instalación paso a paso, comandos de ejecución y reportes.
+- Bitácora AI_USAGE.md: NO CUMPLE. El archivo se encuentra vacío (0 bytes).
+- Video de Sustentación Técnica: PENDIENTE DE REVISIÓN. (Debe validar que se haya entregado con el rostro visible y cumplir los tiempos de la demostración).
+
+2. CAPA MÓVIL (Foco Principal - 35%)
+- Framework: Appium implementado con Python. CUMPLE.
+- Inicio de Sesión (Login): CUMPLE PARCIALMENTE. Se validó el acceso exitoso en `test_login.py`, pero falta el escenario de manejo de credenciales inválidas.
+- Navegación: CUMPLE. `test_buy.py` demuestra transiciones complejas entre múltiples pantallas (Catálogo -> Carrito -> Checkout).
+- Aserciones: CUMPLE. Se usan aserciones de estado lógico (ej. `is_login_successful`, `is_order_successful`).
+- Buenas Prácticas: CUMPLE. Se usó Page Object Model (POM) con esperas dinámicas (`WebDriverWait`) y se prefirieron selectores estables como el ID (`AppiumBy.ID`).
+
+3. CAPA DE API Y CONTRATOS (20%)
+- Framework: Uso de `requests` nativo de Python. CUMPLE.
+- Peticiones Mutables: CUMPLE. Pruebas para POST y PUT implementadas.
+- Aserciones de Estado: CUMPLE. Validación de códigos HTTP 200 y 201 y cabeceras.
+- Validación de Contrato: CUMPLE. Implementación correcta con `jsonschema` validando id, title y price.
+- SLA de Rendimiento: CUMPLE. Aserción de que el tiempo de respuesta sea inferior a 1.5 segundos.
+
+4. CAPA DE MENSAJERÍA Y EVENTOS (Bonus +10%)
+- Integración con Kafka: CUMPLE. Implementación exitosa con `kafka-python`. Produce el evento en `gps-raw-events` y el consumidor realiza las aserciones correctamente comprobando estructura y valores de telemetría.
+
+RESUMEN Y CONCLUSIÓN:
+El proyecto presenta una excelente arquitectura técnica y cumple con casi todos los requerimientos técnicos de automatización, implementando correctamente las capas Móvil, API y Kafka (Bonus). 
+Sin embargo, presenta fallas críticas en los entregables de documentación: el archivo AI_USAGE.md está vacío y el README.md carece de las instrucciones necesarias para levantar y ejecutar el proyecto, lo cual es requerido para evaluar la "Configuración Autónoma" y "Uso Documentado de IA" (15% de la calificación). Se recomienda completar esta documentación para alcanzar el 100% de la prueba.
